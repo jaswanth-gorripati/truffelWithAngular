@@ -1,0 +1,17 @@
+<div class="row">
+	<div class="col-sm-5"><h4>Balance tokens : <span style="color: blue"> {{TokenBal}}</span> </h4></div>
+	<div class="col-sm-5"><h4>Ether Balance : <span style="color: blue"> {{ Etherbal|number : '1.2-4'}}</span> </h4></div>
+</div>
+<div class="col-sm-12">
+	<table class="table table-stripped">
+		<thead>
+			<tr>
+				<td>s.no</td>
+				<td>Loan Amount</td>
+				<td>Tokens Gave</td>
+				<td>Interest/minute</td>
+				<td><button routerLink="payLoan" routerLinkActive='active' class="btn btn-info" (click)="clicked()">Pay Loan Now </button></td>
+			</tr>
+		</thead>
+	</table>
+</div>
