@@ -6,7 +6,35 @@ contract LoanTokens{
     mapping (address => uint256) public balanceOf;
     uint256 public tokenPrice;
 }
-
+contract Ownership{
+    address public Owner;
+    function Ownership() payable{
+       Owner = msg.sender;
+    }
+    modifier onlyOwner{
+        if(msg.sender == Owner){
+            _;
+        }else{
+            require(msg.sender==Owner);
+        }
+    }
+    function kill() onlyOwner returns(string){
+        suicide(msg.sender);
+        return "Contract Killed";
+    }
+    event MoneyTransferedToOwner(uint amount);
+    event NewOwnerEvent(address NewOwnerAddress);
+    function transferOwenership(address newOwner) onlyOwner{
+        Owner = newOwner;
+        NewOwnerEvent(Owner);
+    }
+    function TransferToMyAccount(uint amount) onlyOwner returns(uint){
+        require(amount<=this.balance);
+        MoneyTransferedToOwner(this.balance/(1e18));
+        Owner.transfer(amount);
+        return Owner.balance;
+    }
+}
 contract LoanForCFL{
     function() onlyOwner payable{}
 	LoanTokens m;
